@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="GarbaMate — Find and hire your perfect Garba partner for Navratri, events, rehearsals and celebrations." />
+  <meta name="theme-color" content="#0b0b0f" />
+  <title>GarbaMate — Find Your Perfect Garba Partner</title>
+
+  <style>
+    :root{
+      --bg:#0b0b0f;
+      --surface:#111118;
+      --surface-2:#171720;
+      --card:#14141d;
+      --text:#f7f4ed;
+      --muted:#aaa8b0;
+      --gold:#f7b84b;
+      --gold-2:#ffcf70;
+      --orange:#f97316;
+      --line:rgba(255,255,255,.09);
+      --success:#62d69c;
+      --danger:#ff8e8e;
+      --shadow:0 18px 55px rgba(0,0,0,.42);
+      --radius:22px;
+      --max:1180px;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:
+        radial-gradient(circle at 80% 8%, rgba(247,184,75,.10), transparent 28%),
+        radial-gradient(circle at 10% 28%, rgba(249,115,22,.07), transparent 25%),
+        var(--bg);
+      color:var(--text);
+      line-height:1.6;
+      overflow-x:hidden;
+    }
+    a{color:inherit;text-decoration:none}
+    button,input,select,textarea{font:inherit}
+    button{cursor:pointer}
+    img{max-width:100%;display:block}
+    .container{width:min(var(--max),calc(100% - 40px));margin:auto}
+    .hidden{display:none!important}
+
+    /* NAV */
+    .nav-wrap{
+      position:sticky;
+      top:0;
+      z-index:100;
+      backdrop-filter:blur(18px);
+      background:rgba(11,11,15,.78);
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    nav{
+      min-height:76px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:22px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:11px;
+      font-weight:850;
+      letter-spacing:-.6px;
+      font-size:1.2rem;
+    }
+    .brand-mark{
+      width:38px;height:38px;border-radius:13px;
+      display:grid;place-items:center;
+      color:#111;
+      background:linear-gradient(135deg,var(--gold-2),var(--orange));
+      box-shadow:0 10px 28px rgba(247,184,75,.22);
+      font-size:20px;
+    }
+    .nav-links{
+      display:flex;align-items:center;gap:28px;
+      color:#c5c2ca;font-size:.94rem;
+    }
+    .nav-links a{transition:.25s}
+    .nav-links a:hover{color:var(--text)}
+    .nav-actions{display:flex;align-items:center;gap:10px}
+    .menu-btn{
+      display:none;
+      background:transparent;border:1px solid var(--line);color:var(--text);
+      width:42px;height:42px;border-radius:12px;
+    }
+    .btn{
+      border:0;border-radius:13px;padding:12px 18px;font-weight:750;
+      display:inline-flex;align-items:center;justify-content:center;gap:9px;
+      transition:.22s ease;white-space:nowrap;
+    }
+    .btn:hover{transform:translateY(-2px)}
+    .btn-primary{
+      color:#16100a;
+      background:linear-gradient(135deg,var(--gold-2),var(--gold));
+      box-shadow:0 12px 28px rgba(247,184,75,.16);
+    }
+    .btn-secondary{
+      color:var(--text);background:rgba(255,255,255,.055);
+      border:1px solid var(--line);
+    }
+    .btn-ghost{color:#d8d5dc;background:transparent;border:1px solid var(--line)}
+
+    /* HERO */
+    .hero{
+      padding:82px 0 52px;
+      position:relative;
+    }
+    .hero-grid{
+      display:grid;grid-template-columns:1.12fr .88fr;align-items:center;gap:56px;
+    }
+    .eyebrow{
+      width:max-content;
+      color:#ffd890;background:rgba(247,184,75,.09);
+      border:1px solid rgba(247,184,75,.18);
+      padding:7px 11px;border-radius:999px;font-size:.78rem;font-weight:800;
+      text-transform:uppercase;letter-spacing:.11em;
+    }
+    h1{
+      font-size:clamp(3rem,7vw,5.85rem);
+      line-height:.96;
+      letter-spacing:-.065em;
+      margin:21px 0;
+      max-width:780px;
+    }
+    h1 .accent{
+      background:linear-gradient(100deg,#fff0c5,var(--gold-2) 50%,#ff8f47);
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+    }
+    .hero-copy{
+      color:#b8b6bf;max-width:620px;font-size:1.09rem;
+    }
+    .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+    .mini-proof{
+      display:flex;align-items:center;gap:14px;margin-top:28px;color:#a9a7ae;font-size:.88rem;
+    }
+    .avatars{display:flex;padding-left:10px}
+    .avatar{
+      width:34px;height:34px;border-radius:50%;
+      border:2px solid var(--bg);
+      margin-left:-10px;
+      display:grid;place-items:center;
+      font-weight:850;font-size:.75rem;color:#20170d;
+      background:linear-gradient(145deg,#ffe1a1,#f59e0b);
+    }
+    .avatar:nth-child(2){background:linear-gradient(145deg,#ffd1a2,#ef6c41)}
+    .avatar:nth-child(3){background:linear-gradient(145deg,#ffe7c7,#f9a85f)}
+    .avatar:nth-child(4){background:linear-gradient(145deg,#fff0ba,#e88a2e)}
+    .hero-panel{
+      position:relative;min-height:450px;
+      border:1px solid var(--line);border-radius:30px;
+      background:
+        linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.02)),
+        #101016;
+      box-shadow:var(--shadow);overflow:hidden;padding:22px;
+    }
+    .hero-panel:before{
+      content:"";position:absolute;inset:-20%;
+      background:
+        radial-gradient(circle at 60% 28%,rgba(247,184,75,.19),transparent 20%),
+        radial-gradient(circle at 30% 72%,rgba(249,115,22,.14),transparent 22%);
+      filter:blur(3px);pointer-events:none;
+    }
+    .sparkle{position:absolute;inset:0;opacity:.65}
+    .hero-diya{
+      position:absolute;right:23px;top:20px;font-size:2rem;
+      filter:drop-shadow(0 0 15px rgba(247,184,75,.28));
+    }
+    .showcase-card{
+      position:absolute;left:22px;right:22px;bottom:22px;
+      border-radius:22px;border:1px solid var(--line);
+      background:rgba(13,13,19,.82);backdrop-filter:blur(18px);
+      padding:20px;
+    }
+    .showcase-top{display:flex;justify-content:space-between;align-items:flex-start;gap:20px}
+    .pill{
+      padding:6px 9px;border-radius:999px;font-size:.7rem;font-weight:800;
+      background:rgba(98,214,156,.10);color:#86e7b4;border:1px solid rgba(98,214,156,.16);
+    }
+    .showcase-title{font-size:1.15rem;font-weight:800}
+    .showcase-meta{color:#9f9da5;font-size:.86rem;margin-top:4px}
+    .rating{color:#ffd77f;font-weight:800;font-size:.88rem}
+    .price-row{
+      display:flex;justify-content:space-between;align-items:end;gap:15px;
+      margin-top:20px;padding-top:15px;border-top:1px solid var(--line);
+    }
+    .price-row strong{font-size:1.45rem}
+    .price-row span{color:#8f8c95;font-size:.78rem}
+
+    /* SECTIONS */
+    section{padding:88px 0}
+    .section-head{
+      display:flex;justify-content:space-between;align-items:end;gap:30px;
+      margin-bottom:35px;
+    }
+    .section-kicker{color:#f5c96a;font-size:.78rem;font-weight:850;text-transform:uppercase;letter-spacing:.12em}
+    h2{font-size:clamp(2rem,4vw,3.2rem);line-height:1.05;letter-spacing:-.045em;margin-top:8px}
+    .section-head p{max-width:540px;color:#99969f}
+
+    /* SEARCH */
+    .finder{
+      background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.02));
+      border:1px solid var(--line);border-radius:28px;padding:24px;box-shadow:var(--shadow);
+    }
+    .finder-top{
+      display:flex;justify-content:space-between;gap:18px;align-items:center;margin-bottom:19px;flex-wrap:wrap
+    }
+    .toggle{
+      display:inline-flex;padding:4px;border:1px solid var(--line);background:#0f0f15;border-radius:13px;
+    }
+    .toggle button{
+      border:0;background:transparent;color:#92909a;padding:9px 14px;border-radius:9px;font-weight:750;
+    }
+    .toggle button.active{background:#26231d;color:#ffd77f}
+    .search-grid{
+      display:grid;grid-template-columns:1.1fr .85fr .75fr auto;gap:12px;
+    }
+    .field{
+      min-height:50px;border-radius:13px;border:1px solid var(--line);
+      background:rgba(255,255,255,.035);color:var(--text);padding:0 14px;
+      outline:none;
+    }
+    .field::placeholder{color:#74717a}
+    select.field{appearance:auto}
+
+    /* PROFILES */
+    .profile-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .profile-card{
+      border:1px solid var(--line);background:var(--card);border-radius:22px;
+      overflow:hidden;transition:.25s;position:relative;
+    }
+    .profile-card:hover{transform:translateY(-5px);border-color:rgba(247,184,75,.25)}
+    .profile-cover{
+      height:185px;position:relative;padding:14px;
+      background:
+        radial-gradient(circle at 35% 28%,rgba(255,255,255,.34),transparent 8%),
+        linear-gradient(135deg,#3a2412,#d36c27 45%,#f1ba54);
+    }
+    .profile-cover.two{background:radial-gradient(circle at 75% 30%,rgba(255,255,255,.28),transparent 8%),linear-gradient(135deg,#2e1c33,#94406f 50%,#ec9f7d)}
+    .profile-cover.three{background:radial-gradient(circle at 28% 24%,rgba(255,255,255,.3),transparent 7%),linear-gradient(135deg,#122d2b,#0d7770 52%,#7fd2ae)}
+    .profile-initials{
+      position:absolute;inset:0;display:grid;place-items:center;
+      font-size:4.5rem;font-weight:900;color:rgba(255,255,255,.86);
+      text-shadow:0 8px 30px rgba(0,0,0,.3);
+    }
+    .verified{
+      position:absolute;right:12px;top:12px;background:#0f1512c9;
+      color:#8feab7;border:1px solid rgba(143,234,183,.18);padding:6px 8px;border-radius:999px;
+      font-size:.7rem;font-weight:800;backdrop-filter:blur(10px);
+    }
+    .profile-body{padding:18px}
+    .name-line{display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .name-line h3{font-size:1.12rem}
+    .rate{font-size:.85rem;font-weight:850;color:#ffd77f}
+    .role{color:#9c99a2;font-size:.82rem;margin:2px 0 13px}
+    .chips{display:flex;flex-wrap:wrap;gap:7px}
+    .chip{
+      font-size:.72rem;color:#c8c5cc;border:1px solid var(--line);
+      background:rgba(255,255,255,.03);padding:5px 8px;border-radius:999px
+    }
+    .profile-foot{
+      display:flex;justify-content:space-between;align-items:center;gap:12px;
+      margin-top:17px;padding-top:14px;border-top:1px solid var(--line)
+    }
+    .availability{font-size:.75rem;color:#9a979f}
+    .status-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--success);margin-right:6px}
+
+    /* PRICING */
+    .pricing{
+      background:
+        radial-gradient(circle at 15% 50%,rgba(247,184,75,.08),transparent 25%),
+        radial-gradient(circle at 85% 20%,rgba(249,115,22,.07),transparent 24%);
+    }
+    .pricing-head{
+      display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:34px
+    }
+    .pricing-note{color:#92909a;max-width:520px;font-size:.9rem}
+    .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .price-card{
+      background:var(--card);border:1px solid var(--line);border-radius:24px;padding:25px;
+      position:relative;overflow:hidden;
+    }
+    .price-card.featured{
+      border-color:rgba(247,184,75,.45);
+      box-shadow:0 20px 65px rgba(247,184,75,.10);
+      transform:translateY(-6px);
+    }
+    .popular{
+      position:absolute;right:18px;top:18px;
+      font-size:.68rem;font-weight:850;text-transform:uppercase;letter-spacing:.08em;
+      padding:6px 8px;border-radius:999px;color:#20170d;background:var(--gold);
+    }
+    .price-card h3{font-size:1.15rem}
+    .price-desc{color:#94919b;font-size:.82rem;margin-top:4px;min-height:42px}
+    .price{font-size:2.3rem;letter-spacing:-.04em;font-weight:900;margin:17px 0 3px}
+    .price small{font-size:.75rem;color:#8e8b95;font-weight:600}
+    .features{list-style:none;margin:20px 0 23px;display:grid;gap:11px}
+    .features li{display:flex;gap:9px;color:#c6c3ca;font-size:.83rem}
+    .check{color:#f6c65f;font-weight:900}
+
+    /* PROCESS */
+    .process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}
+    .step{
+      padding:22px;border:1px solid var(--line);border-radius:20px;background:rgba(255,255,255,.025);
+    }
+    .step-num{
+      width:34px;height:34px;border-radius:10px;display:grid;place-items:center;
+      color:#1c1307;background:linear-gradient(135deg,var(--gold-2),var(--orange));font-weight:900;
+      margin-bottom:18px;
+    }
+    .step h3{font-size:1rem;margin-bottom:6px}
+    .step p{color:#96939c;font-size:.82rem}
+
+    /* TRUST */
+    .trust{
+      display:grid;grid-template-columns:.95fr 1.05fr;gap:16px;
+    }
+    .trust-panel{
+      border:1px solid var(--line);border-radius:24px;background:var(--card);padding:26px
+    }
+    .trust-list{display:grid;gap:18px;margin-top:22px}
+    .trust-item{display:flex;gap:13px}
+    .trust-icon{
+      flex:0 0 36px;height:36px;border-radius:11px;display:grid;place-items:center;
+      background:rgba(247,184,75,.08);border:1px solid rgba(247,184,75,.15);color:#ffd77f
+    }
+    .trust-item strong{font-size:.92rem}
+    .trust-item p{font-size:.79rem;color:#8f8c95;margin-top:2px}
+    .testimonial{
+      min-height:100%;display:flex;flex-direction:column;justify-content:space-between;
+    }
+    .quote{font-size:1.35rem;line-height:1.4;letter-spacing:-.02em;color:#f3efe7;max-width:580px}
+    .quote-mark{font-size:4rem;color:#f7b84b;line-height:.7}
+    .person{display:flex;align-items:center;gap:11px;margin-top:30px}
+    .person-avatar{
+      width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-weight:900;
+      color:#22170b;background:linear-gradient(135deg,#ffe0a0,#e98530)
+    }
+    .person small{display:block;color:#8e8b93}
+
+    /* FAQ */
+    .faq{max-width:860px;margin:auto}
+    details{
+      border-bottom:1px solid var(--line);padding:18px 0;
+    }
+    details summary{
+      list-style:none;cursor:pointer;font-weight:750;
+      display:flex;justify-content:space-between;gap:20px;
+    }
+    details summary::-webkit-details-marker{display:none}
+    details summary:after{content:"+";color:#f6c65f;font-size:1.3rem}
+    details[open] summary:after{content:"−"}
+    details p{color:#93909a;font-size:.87rem;max-width:760px;padding:10px 35px 0 0}
+
+    /* CTA */
+    .cta-box{
+      border:1px solid rgba(247,184,75,.22);border-radius:30px;padding:42px;
+      background:
+        linear-gradient(135deg,rgba(247,184,75,.11),rgba(249,115,22,.05)),
+        #101015;
+      display:flex;align-items:center;justify-content:space-between;gap:30px;
+      box-shadow:var(--shadow);
+    }
+    .cta-box h2{max-width:700px}
+    .cta-box p{color:#9f9ca4;margin-top:9px;max-width:650px}
+    .cta-actions{display:flex;gap:10px;flex-wrap:wrap}
+
+    /* FOOTER */
+    footer{border-top:1px solid var(--line);padding:30px 0 38px;color:#88858e;font-size:.8rem}
+    .footer-row{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}
+    .footer-links{display:flex;gap:18px;flex-wrap:wrap}
+    .footer-links a:hover{color:#ddd}
+
+    /* MODAL */
+    .modal-backdrop{
+      position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.68);
+      backdrop-filter:blur(9px);display:grid;place-items:center;padding:20px;
+    }
+    .modal{
+      width:min(520px,100%);background:#14141b;border:1px solid var(--line);
+      border-radius:24px;padding:24px;box-shadow:0 30px 90px rgba(0,0,0,.62);
+    }
+    .modal-head{display:flex;justify-content:space-between;gap:20px;align-items:start}
+    .close{
+      width:36px;height:36px;border:1px solid var(--line);background:rgba(255,255,255,.04);
+      color:#ddd;border-radius:10px;font-size:1.1rem;
+    }
+    .modal-sub{color:#91909a;font-size:.84rem;margin-top:4px}
+    .form{display:grid;gap:12px;margin-top:20px}
+    .form label{font-size:.76rem;color:#b6b3bb;font-weight:700}
+    .form-group{display:grid;gap:7px}
+    textarea.field{padding:12px;min-height:85px;resize:vertical}
+    .form-message{font-size:.8rem;color:#82dfae;min-height:18px}
+
+    /* RESPONSIVE */
+    @media (max-width: 980px){
+      .hero-grid,.trust{grid-template-columns:1fr}
+      .hero-panel{min-height:390px}
+      .search-grid{grid-template-columns:1fr 1fr}
+      .profile-grid,.price-grid{grid-template-columns:1fr 1fr}
+      .process-grid{grid-template-columns:1fr 1fr}
+      .cta-box{flex-direction:column;align-items:flex-start}
+    }
+    @media (max-width: 760px){
+      .container{width:min(var(--max),calc(100% - 28px))}
+      nav{min-height:68px}
+      .nav-links{
+        display:none;position:absolute;left:14px;right:14px;top:76px;
+        flex-direction:column;align-items:flex-start;padding:15px;
+        background:#121219;border:1px solid var(--line);border-radius:16px;
+      }
+      .nav-links.show{display:flex}
+      .menu-btn{display:block}
+      .nav-actions .btn-secondary{display:none}
+      .hero{padding-top:60px}
+      h1{font-size:clamp(2.8rem,14vw,4.5rem)}
+      section{padding:65px 0}
+      .section-head,.pricing-head{align-items:flex-start;flex-direction:column}
+      .search-grid{grid-template-columns:1fr}
+      .profile-grid,.price-grid,.process-grid{grid-template-columns:1fr}
+      .price-card.featured{transform:none}
+      .showcase-card{left:14px;right:14px;bottom:14px}
+      .hero-panel{min-height:380px}
+      .cta-box{padding:28px}
+    }
+    @media (max-width: 460px){
+      .hero-cta,.cta-actions{width:100%}
+      .hero-cta .btn,.cta-actions .btn{flex:1}
+      .finder{padding:16px}
+      .brand span:last-child{display:none}
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ========================= NAVBAR ========================= -->
+  <div class="nav-wrap">
+    <nav class="container">
+      <a href="#home" class="brand" aria-label="GarbaMate home">
+        <span class="brand-mark">✦</span>
+        <span>GarbaMate</span>
+      </a>
+
+      <div class="nav-links" id="navLinks">
+        <a href="#find">Find a Partner</a>
+        <a href="#plans">Packages</a>
+        <a href="#how">How It Works</a>
+        <a href="#safety">Trust & Safety</a>
+        <a href="#faq">FAQ</a>
+      </div>
+
+      <div class="nav-actions">
+        <button class="btn btn-secondary" onclick="openModal('List as a Partner')">Become a Partner</button>
+        <button class="btn btn-primary" onclick="scrollToFinder()">Find My Partner →</button>
+        <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+      </div>
+    </nav>
+  </div>
+
+  <!-- ========================= HERO ========================= -->
+  <main id="home">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Navratri • Garba • Dandiya • Events</div>
+          <h1>Don’t dance <span class="accent">alone.</span><br/>Find your Garba partner.</h1>
+          <p class="hero-copy">
+            GarbaMate helps you discover and hire verified Garba & Dandiya partners
+            for Navratri nights, private events, rehearsals, performances and destination celebrations.
+          </p>
+
+          <div class="hero-cta">
+            <button class="btn btn-primary" onclick="scrollToFinder()">Find a Partner <span>↗</span></button>
+            <button class="btn btn-secondary" onclick="openModal('Become a Garba Partner')">I want to earn as a Partner</button>
+          </div>
+
+          <div class="mini-proof">
+            <div class="avatars" aria-hidden="true">
+              <div class="avatar">A</div><div class="avatar">R</div><div class="avatar">M</div><div class="avatar">K</div>
+            </div>
+            <span>Built around verified profiles, clear packages and safer bookings.</span>
+          </div>
+        </div>
+
+        <div class="hero-panel">
+          <div class="sparkle" aria-hidden="true">✦　·　✧　　 ·　✦　　·　✧</div>
+          <div class="hero-diya">🪔</div>
+
+          <div class="showcase-card">
+            <div class="showcase-top">
+              <div>
+                <div class="showcase-title">Aarav • Garba Partner</div>
+                <div class="showcase-meta">Pune · Traditional Garba · 4 yrs experience</div>
+              </div>
+              <span class="pill">Available</span>
+            </div>
+            <div class="price-row">
+              <div>
+                <span>Starting package</span><br/>
+                <strong>₹999</strong>
+              </div>
+              <div class="rating">★ 4.9 <span style="color:#888">/ 5</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= FINDER ========================= -->
+    <section id="find">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">01 / Find the right fit</div>
+            <h2>Your night. Your style. Your partner.</h2>
+          </div>
+          <p>
+            Choose whether you need a nearby partner or someone available for an
+            international celebration. Then browse profiles based on style, city and availability.
+          </p>
+        </div>
+
+        <div class="finder">
+          <div class="finder-top">
+            <div>
+              <strong>Partner Discovery</strong>
+              <div style="color:#88858f;font-size:.78rem;margin-top:2px">Search the kind of experience you want.</div>
+            </div>
+
+            <div class="toggle" role="tablist" aria-label="Partner type">
+              <button id="localBtn" class="active" onclick="setMode('local')">Local</button>
+              <button id="internationalBtn" onclick="setMode('international')">International</button>
+            </div>
+          </div>
+
+          <div class="search-grid">
+            <input id="cityInput" class="field" placeholder="City or destination" aria-label="City or destination" />
+            <select id="styleSelect" class="field" aria-label="Dance style">
+              <option value="">Any Garba style</option>
+              <option>Traditional Garba</option>
+              <option>Dandiya Raas</option>
+              <option>Fusion Garba</option>
+              <option>Performance / Choreography</option>
+            </select>
+            <select id="genderSelect" class="field" aria-label="Partner preference">
+              <option value="">Any partner</option>
+              <option>Male partner</option>
+              <option>Female partner</option>
+              <option>Open to all</option>
+            </select>
+            <button class="btn btn-primary" onclick="runSearch()">Search →</button>
+          </div>
+          <div id="searchStatus" style="color:#8d8992;font-size:.77rem;margin-top:11px"></div>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;align-items:end;margin:42px 0 18px;gap:20px">
+          <div>
+            <div class="section-kicker">Featured profiles</div>
+            <h2 style="font-size:1.85rem">Partners people book</h2>
+          </div>
+          <button class="btn btn-ghost" onclick="runSearch()">Refresh results</button>
+        </div>
+
+        <div class="profile-grid" id="profileGrid">
+          <!-- JS injects cards -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= PACKAGES ========================= -->
+    <section id="plans" class="pricing">
+      <div class="container">
+        <div class="pricing-head">
+          <div>
+            <div class="section-kicker">02 / Simple pricing</div>
+            <h2>Pick a package. Book with clarity.</h2>
+          </div>
+          <p class="pricing-note">
+            Designed as a simple starting point. Final pricing can vary by duration,
+            partner, event type, location and travel requirements. International bookings may
+            require separate travel/accommodation arrangements.
+          </p>
+        </div>
+
+        <div class="price-grid">
+          <article class="price-card">
+            <h3>Starter Circle</h3>
+            <div class="price-desc">For a fun Garba night, couple entry or casual event.</div>
+            <div class="price">₹999 <small>/ booking</small></div>
+            <ul class="features">
+              <li><span class="check">✓</span> Up to 2 hours of partner time</li>
+              <li><span class="check">✓</span> Garba / Dandiya participation</li>
+              <li><span class="check">✓</span> Verified partner profile</li>
+              <li><span class="check">✓</span> In-app booking coordination</li>
+            </ul>
+            <button class="btn btn-secondary" style="width:100%" onclick="openModal('Starter Circle — ₹999')">Choose Starter</button>
+          </article>
+
+          <article class="price-card featured">
+            <div class="popular">Most chosen</div>
+            <h3>Festive Plus</h3>
+            <div class="price-desc">For longer celebrations, multiple rounds and event hopping.</div>
+            <div class="price">₹2,999 <small>/ booking</small></div>
+            <ul class="features">
+              <li><span class="check">✓</span> Up to 5 hours of partner time</li>
+              <li><span class="check">✓</span> Multiple Garba / Dandiya sessions</li>
+              <li><span class="check">✓</span> Priority partner matching</li>
+              <li><span class="check">✓</span> Event-day coordination</li>
+              <li><span class="check">✓</span> Reschedule support</li>
+            </ul>
+            <button class="btn btn-primary" style="width:100%" onclick="openModal('Festive Plus — ₹2,999')">Choose Festive Plus</button>
+          </article>
+
+          <article class="price-card">
+            <h3>Royal Navratri</h3>
+            <div class="price-desc">For premium events, repeat bookings or dedicated partner time.</div>
+            <div class="price">₹4,999 <small>/ booking</small></div>
+            <ul class="features">
+              <li><span class="check">✓</span> Up to 8 hours of partner time</li>
+              <li><span class="check">✓</span> Premium matching</li>
+              <li><span class="check">✓</span> Event / performance support</li>
+              <li><span class="check">✓</span> Dedicated booking coordinator</li>
+              <li><span class="check">✓</span> Priority support window</li>
+            </ul>
+            <button class="btn btn-secondary" style="width:100%" onclick="openModal('Royal Navratri — ₹4,999')">Choose Royal</button>
+          </article>
+        </div>
+
+        <div style="margin-top:16px;color:#77747d;font-size:.75rem">
+          * Platform/service terms should be finalized before launch. These are prototype package prices for the website.
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= HOW IT WORKS ========================= -->
+    <section id="how">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">03 / How it works</div>
+            <h2>From “who will I dance with?” to booked.</h2>
+          </div>
+          <p>Keep the experience fast and transparent—from discovery to confirmed booking.</p>
+        </div>
+
+        <div class="process-grid">
+          <div class="step">
+            <div class="step-num">1</div>
+            <h3>Choose where</h3>
+            <p>Select Local or International and enter your city or destination.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <h3>Explore partners</h3>
+            <p>Compare dance styles, experience, ratings, availability and package options.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <h3>Choose your package</h3>
+            <p>Pick Starter Circle, Festive Plus or Royal Navratri based on your event.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <h3>Confirm the booking</h3>
+            <p>Share event details and complete the final confirmation with the partner.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= TRUST & SAFETY ========================= -->
+    <section id="safety">
+      <div class="container trust">
+        <div class="trust-panel">
+          <div class="section-kicker">04 / Designed for trust</div>
+          <h2 style="font-size:2.25rem">A marketplace should feel professional.</h2>
+
+          <div class="trust-list">
+            <div class="trust-item">
+              <div class="trust-icon">✓</div>
+              <div><strong>Profile verification</strong><p>Use identity and profile checks before a partner is listed as verified.</p></div>
+            </div>
+            <div class="trust-item">
+              <div class="trust-icon">★</div>
+              <div><strong>Ratings & reviews</strong><p>Let customers see previous booking feedback and partner experience.</p></div>
+            </div>
+            <div class="trust-item">
+              <div class="trust-icon">◈</div>
+              <div><strong>Clear booking scope</strong><p>Define duration, venue, event type, package and any travel requirements before confirmation.</p></div>
+            </div>
+            <div class="trust-item">
+              <div class="trust-icon">!</div>
+              <div><strong>Respectful community rules</strong><p>Set explicit conduct, cancellation and harassment policies for both sides.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="trust-panel testimonial">
+          <div>
+            <div class="quote-mark">“</div>
+            <div class="quote">
+              We wanted a simple way to find someone who already knew the Garba scene,
+              matched our energy, and was actually available on the night.
+            </div>
+          </div>
+          <div class="person">
+            <div class="person-avatar">N</div>
+            <div><strong>Navya R.</strong><small>Event guest · Prototype testimonial</small></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= FAQ ========================= -->
+    <section id="faq">
+      <div class="container">
+        <div class="section-head" style="justify-content:center;text-align:center">
+          <div>
+            <div class="section-kicker">05 / FAQ</div>
+            <h2>Good questions before a good night.</h2>
+          </div>
+        </div>
+
+        <div class="faq">
+          <details>
+            <summary>What is a Garba partner?</summary>
+            <p>A Garba partner is a person you can hire for a defined event or time slot to dance, participate in Garba/Dandiya activities, or support a planned performance according to the agreed booking scope.</p>
+          </details>
+          <details>
+            <summary>Can I book a partner outside my city?</summary>
+            <p>Yes. Use International or a destination-based request for out-of-city and international requirements. Travel, accommodation and related expenses should be agreed separately before confirmation.</p>
+          </details>
+          <details>
+            <summary>What is included in the package price?</summary>
+            <p>The displayed prices are prototype service packages. Your production platform should define exactly what is included, the duration, cancellation policy, taxes, platform fees and any travel charges.</p>
+          </details>
+          <details>
+            <summary>Can I become a Garba partner?</summary>
+            <p>Yes. Partners can create a profile, choose their dance styles, list cities they serve, set availability and submit verification details for review.</p>
+          </details>
+          <details>
+            <summary>How should safety work on the platform?</summary>
+            <p>Keep communication and booking details traceable, verify partners, publish community rules, offer reporting/blocking tools and provide a clear escalation channel for inappropriate behaviour.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= CTA ========================= -->
+    <section>
+      <div class="container">
+        <div class="cta-box">
+          <div>
+            <div class="section-kicker">Ready for the next Garba night?</div>
+            <h2>Find someone who matches your rhythm.</h2>
+            <p>Start with a city, explore profiles, choose a package and submit your event details.</p>
+          </div>
+          <div class="cta-actions">
+            <button class="btn btn-primary" onclick="scrollToFinder()">Find My Partner →</button>
+            <button class="btn btn-secondary" onclick="openModal('Become a Garba Partner')">Join as a Partner</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================= FOOTER ========================= -->
+  <footer>
+    <div class="container footer-row">
+      <div>© <span id="year"></span> GarbaMate. A prototype marketplace concept.</div>
+      <div class="footer-links">
+        <a href="#safety">Safety</a>
+        <a href="#faq">FAQs</a>
+        <a href="#" onclick="openModal('Contact GarbaMate');return false;">Contact</a>
+        <a href="#" onclick="openModal('Terms & Policies');return false;">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================= BOOKING MODAL ========================= -->
+  <div id="modalBackdrop" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal">
+      <div class="modal-head">
+        <div>
+          <div class="section-kicker">Booking request</div>
+          <h2 id="modalTitle" style="font-size:1.7rem">Tell us what you need</h2>
+          <div class="modal-sub" id="modalSub">Share the basics and we’ll route your request.</div>
+        </div>
+        <button class="close" aria-label="Close" onclick="closeModal()">×</button>
+      </div>
+
+      <form class="form" id="bookingForm" onsubmit="submitForm(event)">
+        <div class="form-group">
+          <label for="fullName">Your name</label>
+          <input id="fullName" class="field" required placeholder="e.g. Ammaar Nalkhande" />
+        </div>
+        <div class="form-group">
+          <label for="contact">Email or phone</label>
+          <input id="contact" class="field" required placeholder="How should we contact you?" />
+        </div>
+        <div class="form-group">
+          <label for="eventDate">Event date</label>
+          <input id="eventDate" type="date" class="field" required />
+        </div>
+        <div class="form-group">
+          <label for="requestNotes">Event details</label>
+          <textarea id="requestNotes" class="field" placeholder="City, event type, preferred style, timing, partner preference..."></textarea>
+        </div>
+        <input type="hidden" id="requestType" />
+        <div id="formMessage" class="form-message"></div>
+        <button class="btn btn-primary" type="submit">Submit Request →</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const partners = [
+      {
+        name:"Aarav Mehta", initials:"AM", city:"Pune", style:"Traditional Garba",
+        exp:"4 yrs experience", rating:"4.9", price:"₹999", available:true, cover:""
+      },
+      {
+        name:"Riya Shah", initials:"RS", city:"Mumbai", style:"Dandiya Raas",
+        exp:"5 yrs experience", rating:"4.8", price:"₹1,499", available:true, cover:"two"
+      },
+      {
+        name:"Meet Patel", initials:"MP", city:"Ahmedabad", style:"Fusion Garba",
+        exp:"6 yrs experience", rating:"5.0", price:"₹1,999", available:false, cover:"three"
+      },
+      {
+        name:"Kavya Desai", initials:"KD", city:"Pune", style:"Performance / Choreography",
+        exp:"3 yrs experience", rating:"4.9", price:"₹2,499", available:true, cover:"two"
+      },
+      {
+        name:"Rohan Joshi", initials:"RJ", city:"Nashik", style:"Traditional Garba",
+        exp:"4 yrs experience", rating:"4.7", price:"₹999", available:true, cover:""
+      },
+      {
+        name:"Maya Shah", initials:"MS", city:"Dubai", style:"Dandiya Raas",
+        exp:"7 yrs experience", rating:"5.0", price:"₹3,999", available:true, cover:"three"
+      }
+    ];
+
+    let mode = "local";
+
+    const grid = document.getElementById("profileGrid");
+    const searchStatus = document.getElementById("searchStatus");
+
+    function renderProfiles(list = partners) {
+      grid.innerHTML = "";
+
+      if (!list.length) {
+        grid.innerHTML = `
+          <div style="grid-column:1/-1;border:1px dashed var(--line);padding:35px;border-radius:20px;text-align:center;color:#96939c">
+            No exact matches yet. Try a broader city, style, or partner preference.
+          </div>`;
+        return;
+      }
+
+      list.forEach((p, i) => {
+        const card = document.createElement("article");
+        card.className = "profile-card";
+        card.innerHTML = `
+          <div class="profile-cover ${p.cover}">
+            <div class="profile-initials">${p.initials}</div>
+            <div class="verified">✓ Verified</div>
+          </div>
+          <div class="profile-body">
+            <div class="name-line">
+              <h3>${p.name}</h3>
+              <div class="rate">★ ${p.rating}</div>
+            </div>
+            <div class="role">${p.city} · ${p.style}</div>
+            <div class="chips">
+              <span class="chip">${p.exp}</span>
+              <span class="chip">${mode === "international" ? "Destination booking" : "Local booking"}</span>
+            </div>
+            <div class="profile-foot">
+              <div class="availability">
+                <span class="status-dot" style="background:${p.available ? 'var(--success)' : '#777'}"></span>
+                ${p.available ? "Available for requests" : "Limited availability"}
+              </div>
+              <button class="btn btn-secondary" style="padding:8px 11px;font-size:.75rem" onclick="openModal('Book ${p.name} — from ${p.price}')">View & Book</button>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function setMode(newMode) {
+      mode = newMode;
+      document.getElementById("localBtn").classList.toggle("active", mode === "local");
+      document.getElementById("internationalBtn").classList.toggle("active", mode === "international");
+
+      const cityInput = document.getElementById("cityInput");
+      cityInput.placeholder = mode === "international"
+        ? "Country or destination city"
+        : "City or destination";
+
+      searchStatus.textContent = mode === "international"
+        ? "International mode: travel, accommodation and local compliance can be quoted separately."
+        : "Local mode: discover partners by city and event requirements.";
+
+      renderProfiles(
+        mode === "international"
+          ? partners.filter(p => ["Dubai","Ahmedabad"].includes(p.city) || p.name === "Maya Shah")
+          : partners
+      );
+    }
+
+    function runSearch() {
+      const city = document.getElementById("cityInput").value.trim().toLowerCase();
+      const style = document.getElementById("styleSelect").value;
+      const gender = document.getElementById("genderSelect").value;
+
+      let results = partners.filter(p => {
+        const cityMatch = !city || p.city.toLowerCase().includes(city) || (mode === "international" && p.city === "Dubai");
+        const styleMatch = !style || p.style === style;
+        return cityMatch && styleMatch;
+      });
+
+      if (mode === "international") {
+        results = results.filter(p => ["Dubai","Ahmedabad"].includes(p.city));
+      }
+
+      renderProfiles(results);
+      searchStatus.textContent =
+        `${results.length} partner${results.length === 1 ? "" : "s"} shown · ${mode === "international" ? "International" : "Local"} mode`
+        + (gender ? ` · Preference: ${gender}` : "");
+    }
+
+    function scrollToFinder() {
+      document.getElementById("find").scrollIntoView({behavior:"smooth"});
+      setTimeout(() => document.getElementById("cityInput").focus(), 550);
+    }
+
+    const backdrop = document.getElementById("modalBackdrop");
+    function openModal(type) {
+      document.getElementById("requestType").value = type;
+      document.getElementById("modalTitle").textContent =
+        type.includes("Partner") && !type.includes("Book") ? "Become part of GarbaMate" : "Tell us what you need";
+      document.getElementById("modalSub").textContent = type;
+      document.getElementById("formMessage").textContent = "";
+      backdrop.classList.remove("hidden");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeModal() {
+      backdrop.classList.add("hidden");
+      document.body.style.overflow = "";
+    }
+
+    backdrop.addEventListener("click", (e) => {
+      if (e.target === backdrop) closeModal();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !backdrop.classList.contains("hidden")) closeModal();
+    });
+
+    function submitForm(e) {
+      e.preventDefault();
+      const type = document.getElementById("requestType").value;
+      document.getElementById("formMessage").textContent =
+        `Request received for “${type}”. Connect this form to your backend, CRM or payment flow before production launch.`;
+      e.target.reset();
+    }
+
+    document.getElementById("menuBtn").addEventListener("click", () => {
+      document.getElementById("navLinks").classList.toggle("show");
+    });
+
+    document.querySelectorAll(".nav-links a").forEach(a => {
+      a.addEventListener("click", () => document.getElementById("navLinks").classList.remove("show"));
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+    renderProfiles();
+    searchStatus.textContent = "Local mode: discover partners by city and event requirements.";
+  </script>
+</body>
+</html>
